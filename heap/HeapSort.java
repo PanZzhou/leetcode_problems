@@ -10,19 +10,19 @@ public class HeapSort {
         System.out.println();
     }
     private void buildHeap(){
-        for (int i = heap.length/2; i > 0 ; --i)
+        for (int i = heap.length/2; i >0 ; --i) {
             adjustHeap(i,heap.length);
+        }
         System.out.println("建堆后：");
         sout();
         System.out.println();
     }
     private void adjustHeap(int index,int end){
         int temp = heap[index-1];
-        for (int i = 2*index; i <= end; i = 2*index) {
-            if(i+1<=end&&heap[i]>heap[i-1]) i++;
-            if(heap[i-1]<temp)
-                break;
-            heap[index-1]=heap[i-1];
+        for (int i = 2*index; i <= end ; i=2*index) {
+            if(i<end&&heap[i]>heap[i-1]) i++;
+            if(temp>heap[i-1]) break;
+            heap[index-1] = heap[i-1];
             index=i;
         }
         heap[index-1]=temp;
