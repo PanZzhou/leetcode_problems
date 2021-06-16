@@ -1,4 +1,4 @@
-package com.pan.leetcode;
+package com.pan.leetcode.stack;
 
 import java.util.Deque;
 import java.util.LinkedList;
