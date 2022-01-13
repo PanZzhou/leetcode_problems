@@ -7,7 +7,7 @@ import java.util.Queue;
 
 public class P_133克隆图 {
     public Node cloneGraph(Node node) {
-        Map<Node,Node> hash = new HashMap<>();
+        Map<Node,Node> hash = new HashMap<>();//用于记住已经遍历过的节点
         return dfs(node,hash);
         // return bfs(node,new HashMap<Node,Node>(),new LinkedList<Node>());
     }
