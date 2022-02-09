@@ -1,4 +1,4 @@
-package com.pan.leetcode.dp;
+package com.pan.leetcode.dp.二维类;
 
 public class P_64最小路径和 {
     public int minPathSum(int[][] grid) {
