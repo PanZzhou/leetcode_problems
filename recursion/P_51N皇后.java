@@ -7,6 +7,7 @@ import java.util.List;
 public class P_51N皇后 {
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> res = new ArrayList<>();
+        //用一个数列记录n*n矩阵中皇后得放置位置
         int[] queens = new int[n];
         Arrays.fill(queens, -1);
         solve(res, queens, n, 0, 0, 0, 0);
@@ -29,8 +30,10 @@ public class P_51N皇后 {
                 int position = availablePosition & (-availablePosition);    //获取最低位为1的位置
                 availablePosition = availablePosition&(availablePosition-1);    //最低位的1置为零。
                 int col = Integer.bitCount(position-1); //获取列号
+                //递归回溯前记录回溯状态
                 queens[row] = col;
                 solve(res,queens,n,row+1,(column | position),(diag1|position)<<1,(diag2|position)>>1);
+                //递归结束后复原回溯前的状态
                 queens[row] = -1;
             }
         }
