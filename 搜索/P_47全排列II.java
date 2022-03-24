@@ -23,6 +23,7 @@ public class P_47全排列II {
         }
         //每次填第inx个元素时，遍历一遍nums数组，选择不重复的数字放进结果
         for (int i = 0; i < nums.length; i++) {
+            //!vis[i-1]表示了必须先填入前面的相同数才行
             if(vis[i] || (i>0 && nums[i]==nums[i-1] && !vis[i-1]))
                 continue;
             ans.add(nums[i]);
