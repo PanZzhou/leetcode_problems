@@ -2,31 +2,27 @@ package com.pan.leetcode.剑指offer.medium;
 
 public class P_剑指Offer20表示数值的字符串 {
     public boolean isNumber(String s) {
-        if (s == null || s.length() == 0) return false;
-        //去掉首位空格
-        s = s.trim();
-        boolean numFlag = false;
-        boolean dotFlag = false;
-        boolean eFlag = false;
-        for (int i = 0; i < s.length(); i++) {
-            //判定为数字，则标记numFlag
-            if (s.charAt(i) >= '0' && s.charAt(i) <= '9') {
-                numFlag = true;
-                //判定为.  需要没出现过.并且没出现过e
-            } else if (s.charAt(i) == '.' && !dotFlag && !eFlag) {
-                dotFlag = true;
-                //判定为e，需要没出现过e，并且出过数字了
-            } else if ((s.charAt(i) == 'e' || s.charAt(i) == 'E') && !eFlag && numFlag) {
-                eFlag = true;
-                numFlag = false;//为了避免123e这种请求，出现e之后就标志为false
-                //判定为+-符号，只能出现在第一位或者紧接e后面
-            } else if ((s.charAt(i) == '+' || s.charAt(i) == '-') && (i == 0 || s.charAt(i - 1) == 'e' || s.charAt(i - 1) == 'E')) {
-
-                //其他情况，都是非法的
-            } else {
-                return false;
-            }
+        if(s == null || s.length() == 0) return false;
+        boolean isNum = false;
+        boolean isDot = false;
+        boolean isE = false;
+        int i = 0;
+        for (; i < s.length(); i++) {
+            if(s.charAt(i) != ' ') break;
         }
-        return numFlag;
+        while(i<s.length()){
+            char c = s.charAt(i);
+            if(c>='0' && c<='9')
+                isNum = true;
+            else if(c=='.' && !isDot && !isE)
+                isDot = true;
+            else if((c=='e'||c=='E')&&!isE && isNum){
+                isNum = false;
+                isE = true;
+            }else if((c=='+' || c=='-')&&(i==0 || s.charAt(i-1)=='e' || s.charAt(i-1)=='E')) {
+            }
+            else return false;
+        }
+        return isNum;
     }
 }
