@@ -7,9 +7,7 @@ public class P_剑指Offer20表示数值的字符串 {
         boolean isDot = false;
         boolean isE = false;
         int i = 0;
-        for (; i < s.length(); i++) {
-            if(s.charAt(i) != ' ') break;
-        }
+        s = s.trim();//去掉首尾两端的空格字符
         while(i<s.length()){
             char c = s.charAt(i);
             if(c>='0' && c<='9')
@@ -22,6 +20,7 @@ public class P_剑指Offer20表示数值的字符串 {
             }else if((c=='+' || c=='-')&&(i==0 || s.charAt(i-1)=='e' || s.charAt(i-1)=='E')) {
             }
             else return false;
+            i++;
         }
         return isNum;
     }
