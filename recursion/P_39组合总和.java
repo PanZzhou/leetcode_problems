@@ -20,8 +20,10 @@ public class P_39组合总和 {
             res.add(new ArrayList<>(candidate));
             return;
         }
+        //跳过当前数
         dfs(candidates,res,candidate,target,index+1);
         if(target-candidates[index]>=0){
+            //选择或者重复选择当前数
             candidate.add(candidates[index]);
             dfs(candidates,res,candidate,target-candidates[index],index);
             candidate.remove(candidate.size()-1);
