@@ -6,21 +6,48 @@ import java.util.PriorityQueue;
 import java.util.Set;
 
 public class P_378有序矩阵中第K小的元素 {
+    //使用二分法
+    public int kthSmallest(int[][] matrix, int k) {
+        int m = matrix.length;
+        int left = matrix[0][0], right = matrix[m-1][m-1];
+        while(left < right){
+            int x = (left + right) >> 1;
+            if(check(matrix, x) >= k)
+                right = x;
+            else
+                left = x + 1;
+        }
+        return left;
+    }
+    private int check(int[][] matrix, int target){
+        int cnt = 0, i = matrix.length-1, j = 0;
+        while(i>=0 && j<matrix.length){
+            if(matrix[i][j] <= target){
+                cnt += i+1;
+                j++;
+            }
+            else{
+                i--;
+            }
+        }
+        return cnt;
+    }
+
     //归并两个数组很容易，归并n个数组就可以使用堆来减少时间复杂度。
     //这个方法比下面这个方法好多了
-    public int kthSmallest(int[][] matrix, int k){
-        PriorityQueue<int[]> heap = new PriorityQueue<>((a,b)->a[0]-b[0]);//最小堆
-        int order=1;
-        for(int i=0;i<matrix.length;i++){
-            heap.offer(new int[]{matrix[i][0],i,0});
-        }
-        while(order++<k){
-            int[] top = heap.poll();
-            if(top[2]+1<matrix[0].length)
-                heap.offer(new int[]{matrix[top[1]][top[2]+1],top[1],top[2]+1});
-        }
-        return heap.peek()[0];
-    }
+//    public int kthSmallest(int[][] matrix, int k){
+//        PriorityQueue<int[]> heap = new PriorityQueue<>((a,b)->a[0]-b[0]);//最小堆
+//        int order=1;
+//        for(int i=0;i<matrix.length;i++){
+//            heap.offer(new int[]{matrix[i][0],i,0});
+//        }
+//        while(order++<k){
+//            int[] top = heap.poll();
+//            if(top[2]+1<matrix[0].length)
+//                heap.offer(new int[]{matrix[top[1]][top[2]+1],top[1],top[2]+1});
+//        }
+//        return heap.peek()[0];
+//    }
     //下面这个方法从左上角开始，空间复杂度太大达到n2
 //    public int kthSmallest(int[][] matrix, int k) {
 //        if(matrix==null)
