@@ -79,6 +79,7 @@ public class P_462最少移动次数使数组元素相等II {
     public int partition(int[] nums, int left, int right) {
         int x = nums[right], i = left - 1;
         for (int j = left; j < right; ++j) {
+            //若i停下来了的话，那么i+1位置的元素就是比nums[right]更大的数
             if (nums[j] <= x) {
                 ++i;
                 swap(nums, i, j);
